@@ -1,93 +1,72 @@
-# pab-assignment-02-bacterial-growth-simulation
+# Assignment 02: Bacterial Growth Simulation
+### Programação Aplicada à Bioinformática (P.A.B.) Course
 
-## Description
+## 📖 Introduction
+This project is a Python-based simulation designed to model the life cycle, growth, and spatial distribution of bacterial colonies on a 2D grid. Developed for the **Principles of Algorithmic Bioinformatics** (PAB) assignment, the simulation utilizes a Cellular Automata approach to visualize how different species compete for space based on biological parameters.
 
-This project is a Python 3 program that simulates the growth of bacterial populations on a two-dimensional rectangular grid over discrete time steps. The simulation follows an object-oriented design and was developed for the Programming Applied to Bioinformatics course.
+## ✅ Project Structure & Integrity
+To satisfy the assignment requirements, the project is divided into two distinct files to separate execution logic from data modeling:
 
-Bacteria are represented as objects belonging to different species, with species parameters defined in an external JSON configuration file provided at runtime. The program produces both a terminal visualization of the grid and numerical population statistics logged to a CSV file.
+1.  **`bgc.py` (Main Execution Script):** Responsible for parsing command-line arguments using the `sys` module, loading environment settings via the `json` module, and orchestrating the simulation flow.
+2.  **`models.py` (Core Logic Module):** Contains the required class definitions (`Bacterium`, `Grid`, and `Simulation`) that drive the biological and spatial logic.
 
-The implementation uses only the Python standard library and prioritizes clean structure, modularity, and correctness over biological realism.
+The program relies exclusively on the Python standard library, ensuring it remains lightweight and portable. This architecture ensures robust state management, efficiently tracking occupied cells and processing complex biological events—such as growth cycles and mitosis within discrete, sequential time steps.
 
-## Program Structure
+---
 
-The codebase is organized into modules with clear responsibilities:
+## 🛠️ Technical Logic Breakdown
 
-- bacterium.py  
-  Defines the Bacterium class representing a single bacterium. Each instance stores species properties (name, symbol, growth rate, division threshold) and maintains its internal state (size or age). It also exposes methods to update growth and to report current size/age.
+### 1. The Biological Model (`Bacterium` class)
+Defined within `models.py`, each bacterium tracks its own **size**. 
+* **Growth:** Size increases by a fixed `growth_rate` per step.
+* **Division:** Once size reaches the `division_threshold`, the bacterium attempts to reproduce.
 
-- grid.py  
-  Defines the Grid class representing the 2D simulation space. The grid manages cell occupancy, checks whether a cell is empty, retrieves neighboring positions (up/down/left/right), and prints the grid to the terminal using 0 for empty cells and the species symbol for occupied cells.
+### 2. Spatial Environment (`Grid` class)
+This class manages a 2D coordinate system. It utilizes the `random` module for stochastic placement and a **von Neumann neighborhood** (Up, Down, Left, Right) to determine where offspring can spread.
 
-- simulation.py  
-  Defines the Simulation class that controls the overall simulation. It initializes the grid and starting population, advances the system by one time step, runs the simulation for a given number of steps, controls how often the grid is printed, and logs population statistics to a CSV file.
+### 3. Simulation Logic (`Simulation` class)
+The simulation handles the iterative steps of the experiment, logging population dynamics using the `csv` module and optionally using `time.sleep()` to control the visual rendering speed of the grid.
 
-- main.py  
-  Entry point of the program. Parses command-line arguments, loads and validates the JSON configuration, initializes the Simulation object, and starts execution.
+---
 
-## Simulation Model
+## 📂 Configuration & Data Handling
 
-### Grid
+### JSON Configuration
+The simulation is highly customizable via a JSON file, allowing researchers to define multiple species with varying competitive advantages.
 
-- The environment is a 2D rectangular grid.
-- Each cell is either empty or occupied by one bacterium.
-- Multiple bacteria cannot occupy the same cell.
-- Empty cells are represented by the character 0.
-- Cells containing bacteria are represented by the single-character symbol defined for that species.
+CODEBLOCK_1
 
-### Time
+---
 
-- The simulation runs in discrete time steps.
-- At each time step, all bacteria:
-  - Grow according to their growth rate.
-  - Attempt division if the division threshold is reached.
+## 🚀 Execution Guide
 
-### Growth and Division Rules
+### Prerequisites
+* Python 3.x
+* Both `bgc.py` and `models.py` must be located in the same directory.
 
-- At each time step, every bacterium grows according to its growth rate.
-- When a bacterium reaches its division threshold:
-  - It attempts to divide into a neighboring cell.
-  - Division succeeds only if at least one neighboring cell is empty.
-  - If division succeeds, a new bacterium of the same species is placed in the chosen empty neighboring cell.
-  - If no empty neighboring cell exists, division does not occur.
-- Neighboring cells are defined as up, down, left, and right.
+### Running the Simulation
+```python main.py 20 20 100 100 config.json results.csv```
 
-## Inputs (Command Line)
+**Argument Breakdown:**
+1. `width` / `height`: Grid dimensions.
+2. `steps`: Total duration.
+3. `print_freq`: Grid printing frequency (0 to disable).
+4. `config.json`: Species settings.
+5. `output.csv`: Destination for population results.
 
-The program must receive the following arguments via the command line:
+---
 
-1. Grid width
-2. Grid height
-3. Number of simulation steps
-4. Frequency at which the grid is printed
-5. Path to the JSON configuration file
-6. Path to the output CSV file
+## 📊 Visual Output
+When printing is enabled, the console displays a live map. `0` represents empty space, while characters represent unique species symbols.
 
-## Outputs
+OUTPUT_1
 
-### Grid Visualization
+---
 
-- The grid is printed to the terminal at the specified frequency.
-- Empty cells are displayed as 0.
-- Cells containing bacteria display the symbol defined for that species.
+## 🔬 Scientific Analysis
+* **Growth Rate vs. Threshold:** Observe how birth frequency affects dominance.
+* **Spatial Exclusion:** Watch how colonies block each other's expansion.
+* **Carrying Capacity:** Simulation stops automatically when the grid is saturated (total population equals grid area).
 
-### CSV Log File
-
-- The program generates a comma-separated CSV file.
-- Each row corresponds to one simulation step (even if grid printing frequency differs).
-- Each column corresponds to one bacterial species.
-- The CSV file contains a header row.
-- Values represent the number of bacteria of each species at each step.
-
-## Constraints and Notes
-
-- The program is written in Python 3.
-- The program is not linear; the majority of the code resides inside functions and classes.
-- All functions take at least one parameter.
-- Only the Python standard library is used (no third-party packages).
-- List comprehensions, dictionary comprehensions, set comprehensions, tuple comprehensions, and generator expressions are not used.
-- The simulation is a computational toy model; biological realism is not required.
-
-## License
-
-This project is released under the MIT License. See the LICENSE file for details.
- 
+## 📄 License
+Released under the MIT License.

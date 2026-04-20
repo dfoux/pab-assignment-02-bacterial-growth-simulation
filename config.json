@@ -1,0 +1,12 @@
+{
+  "species": [
+    { "name": "Type01", "symbol": ".", "growth_rate": 0.90, "division_threshold": 1.0, "initial_count": 1 },
+    { "name": "Type02", "symbol": ",", "growth_rate": 0.20, "division_threshold": 1.4, "initial_count": 1 },
+    { "name": "Type03", "symbol": "-", "growth_rate": 0.35, "division_threshold": 1.2, "initial_count": 1 },
+    { "name": "Type04", "symbol": "'", "growth_rate": 0.15, "division_threshold": 1.8, "initial_count": 1 },
+    { "name": "Type05", "symbol": "%", "growth_rate": 0.60, "division_threshold": 1.3, "initial_count": 1 },
+    { "name": "Type06", "symbol": "(", "growth_rate": 0.40, "division_threshold": 1.0, "initial_count": 1 },
+    { "name": "Type07", "symbol": "=", "growth_rate": 0.25, "division_threshold": 1.6, "initial_count": 1 },
+    { "name": "Type20", "symbol": "T", "growth_rate": 0.38, "division_threshold": 1.75, "initial_count": 1 }
+  ]
+}
