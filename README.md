@@ -59,8 +59,13 @@ CODEBLOCK_1
 ## 📊 Visual Output
 When printing is enabled, the console displays a live map. `0` represents empty space, while characters represent unique species symbols.
 
-OUTPUT_1
-
+```
+# # # 0 0 0 . .
+# # # 0 0 0 . .
+~ ~ ~ x x x 0 0
+~ ~ ~ x x x 0 0
+0 0 0 I I I @ @
+```
 ---
 
 ## 🔬 Scientific Analysis
