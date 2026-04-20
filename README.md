@@ -34,7 +34,15 @@ The simulation handles the iterative steps of the experiment, logging population
 ### JSON Configuration
 The simulation is highly customizable via a JSON file, allowing researchers to define multiple species with varying competitive advantages.
 
-CODEBLOCK_1
+```
+{
+  "species": [
+    { "name": "Type01", "symbol": ".", "growth_rate": 0.90, "division_threshold": 1.0, "initial_count": 1 },
+    { "name": "Type02", "symbol": ",", "growth_rate": 0.20, "division_threshold": 1.4, "initial_count": 1 },
+    { "name": "Type03", "symbol": "-", "growth_rate": 0.35, "division_threshold": 1.2, "initial_count": 1 }
+  ]
+}
+```
 
 ---
 
